@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  graphite:
+    image: "sitespeedio/graphite"
+    ports:
+      - "8080:80"
+      - "2003:2003"
+
+  grafana:
+    image: "grafana/grafana"
+    ports:
+      - "3000:3000"
+    volumes: 
+      - ./var/lib/grafana:/var/lib/grafana
+    
+  cassandra-1:
+    build:
+      context: .
+      args:
+        graphiteprefix: cassandra-node1
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-1
+    volumes:
+      - ./var/lib/cassandra-1:/var/lib/cassandra
+    ports:
+      - "7000"
+
+  cassandra-2:
+    build:
+      context: .
+      args:
+        graphiteprefix: cassandra-node2
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-2
+      CASSANDRA_SEEDS: cassandra-1
+    depends_on:
+      - cassandra-1
+    volumes:
+      - ./var/lib/cassandra-2:/var/lib/cassandra
+    ports:
+      - "7000"
+
+  cassandra-3:
+    build:
+      context: .
+      args:
+        graphiteprefix: cassandra-node3
+    environment:
+      CASSANDRA_BROADCAST_ADDRESS: cassandra-3
+      CASSANDRA_SEEDS: cassandra-1
+    depends_on:
+      - cassandra-1
+    volumes:
+      - ./var/lib/cassandra-3:/var/lib/cassandra
+    ports:
+      - "7000"
+

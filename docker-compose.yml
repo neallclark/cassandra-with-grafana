@@ -15,5 +15,8 @@ services:
       - ./var/lib/grafana:/var/lib/grafana
     
   cassandra:
-    build: .
+    build:
+      context: .
+      args:
+        graphiteprefix: cassandra-node1
     

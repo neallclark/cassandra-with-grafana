@@ -2,7 +2,7 @@ graphite:
   -
     period: 30
     timeunit: 'SECONDS'
-    prefix: 'cassandra-clustername-node1'
+    prefix: '__GRAPHITE_PREFIX__'
     hosts:
      - host: '192.168.1.36'
        port: 2003
