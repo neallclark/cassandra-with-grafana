@@ -19,4 +19,16 @@ services:
       context: .
       args:
         graphiteprefix: cassandra-node1
+
+  cassandra-init:
+    build:
+      context: ./init_schema
+    depends_on:
+      - cassandra
+    environment:
+      cassandra_node: cassandra
+    ports:
+      - "9042"
+    links:
+      - cassandra
     

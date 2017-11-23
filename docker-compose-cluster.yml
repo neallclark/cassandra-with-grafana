@@ -25,6 +25,7 @@ services:
       - ./var/lib/cassandra-1:/var/lib/cassandra
     ports:
       - "7000"
+      - "9042:9042"
 
   cassandra-2:
     build:
@@ -55,4 +56,19 @@ services:
       - ./var/lib/cassandra-3:/var/lib/cassandra
     ports:
       - "7000"
+
+  cassandra-init:
+    build:
+      context: ./init_schema
+    depends_on:
+      - cassandra-3
+    environment:
+      cassandra_node: cassandra-1
+    ports:
+      - "9042"
+    links:
+      - cassandra-1
+
+
+    
 
