@@ -57,17 +57,6 @@ services:
     ports:
       - "7000"
 
-  cassandra-init:
-    build:
-      context: ./init_schema
-    depends_on:
-      - cassandra-3
-    environment:
-      cassandra_node: cassandra-1
-    ports:
-      - "9042"
-    links:
-      - cassandra-1
 
 
     

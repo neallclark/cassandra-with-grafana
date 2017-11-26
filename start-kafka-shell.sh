@@ -1,0 +1,1 @@
+winpty docker run --rm -e HOST_IP=$1 -e ZK=$2 -it wurstmeister/kafka bash
