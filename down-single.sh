@@ -1,0 +1,1 @@
+docker-compose -f docker-compose.yml -f docker-compose.kafka.yml -f docker-compose.spark.yml down
