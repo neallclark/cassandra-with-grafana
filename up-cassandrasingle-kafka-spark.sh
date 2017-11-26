@@ -1,0 +1,2 @@
+docker-compose -f docker-compose.yml -f docker-compose.kafka.yml -f docker-compose.spark.yml down
+docker-compose -f docker-compose.yml -f docker-compose.kafka.yml -f docker-compose.spark.yml up --force-recreate --build -d
